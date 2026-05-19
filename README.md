@@ -1,2 +1,83 @@
 # Python-project-week-3
 This Python program is a Random Password Generator designed to create secure passwords using letters, numbers, and special characters. The project is useful for improving password security and protecting user accounts.
+
+ Code:
+ import random
+import string
+
+print("")
+print("     RANDOM PASSWORD GENERATOR")
+print("")
+
+# Function to generate password
+def generate_password(length, use_special):
+
+    # Letters and digits
+    characters = string.ascii_letters + string.digits
+
+    # Add special characters if user wants
+    if use_special:
+        characters += string.punctuation
+
+    # Generate random password
+    password = ""
+
+    for i in range(length):
+        password += random.choice(characters)
+
+    return password
+
+
+# Main Program
+while True:
+
+    print("\nMenu")
+    print("1. Generate Password")
+    print("2. Exit")
+
+    choice = input("Enter your choice (1 or 2): ")
+
+    if choice == '1':
+
+        try:
+            # Ask password length
+            length = int(input("Enter password length: "))
+
+            # Check minimum length
+            if length < 4:
+                print("Password length should be at least 4.")
+                continue
+
+            # Ask for special characters
+            special = input("Include special characters? (yes/no): ").lower()
+
+            if special == "yes":
+                use_special = True
+            else:
+                use_special = False
+
+            # Generate password
+            password = generate_password(length, use_special)
+
+            # Display result
+            print("\nGenerated Password:")
+            print(password)
+
+            # Password strength
+            if length >= 12:
+                print("Strength: Strong Password")
+            elif length >= 8:
+                print("Strength: Medium Password")
+            else:
+                print("Strength: Weak Password")
+
+        except:
+            print("Invalid Input! Please enter numbers only.")
+
+    elif choice == '2':
+        print("\nThank You for Using Password Generator!")
+        print("Project Completed Successfully.")
+        break
+
+    else:
+        print("Invalid Choice! Please select 1 or 2.")
